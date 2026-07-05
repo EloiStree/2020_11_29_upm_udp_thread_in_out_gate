@@ -13,9 +13,11 @@ public class UDPThreadDispatcherText : MonoBehaviour
     public int m_portId = 2504;
     public float m_timeBetweenUnityCheck=0.05f;
     public UnityEvent<string> m_messageReceived;
+    public UnityEvent<ReceivedMessageWithSourceAsUTF8> m_messageReceivedWithSource;
     public System.Threading.ThreadPriority m_threadPriority;
 
     public Queue<string> m_receivedMessages = new Queue<string>();
+    public Queue<ReceivedMessageWithSourceAsUTF8> m_receivedMessagesWithSource = new Queue<ReceivedMessageWithSourceAsUTF8>();
     public string m_lastReceived;
     private bool m_wantThreadAlive = true;
     private Thread m_threadListener=null;
@@ -87,6 +89,11 @@ public class UDPThreadDispatcherText : MonoBehaviour
             m_lastReceived = m_receivedMessages.Dequeue();
             m_messageReceived.Invoke(m_lastReceived);
         }
+        while (m_receivedMessagesWithSource.Count > 0)
+        {
+            ReceivedMessageWithSourceAsUTF8 msg = m_receivedMessagesWithSource.Dequeue();
+            m_messageReceivedWithSource.Invoke(msg);
+        }
     }
 
     private void ChechUdpClientMessageInComing() {
@@ -106,6 +113,7 @@ public class UDPThreadDispatcherText : MonoBehaviour
                     Encoding.UTF8.GetString(receiveBytes):
                     Encoding.Unicode.GetString(receiveBytes);
                 m_receivedMessages.Enqueue(returnData);
+                m_receivedMessagesWithSource.Enqueue(new ReceivedMessageWithSourceAsUTF8(returnData, m_ipEndPoint));
                 //RemoteIpEndPoint.Address.ToString() --  RemoteIpEndPoint.Port.ToString());
             }
             catch (Exception e)

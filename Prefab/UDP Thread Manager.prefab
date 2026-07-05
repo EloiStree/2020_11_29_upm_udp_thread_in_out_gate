@@ -63,6 +63,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_messageReceivedWithSource:
+    m_PersistentCalls:
+      m_Calls: []
   m_threadPriority: 0
   m_lastReceived: 00
   m_hasBeenKilled: 0
@@ -114,7 +117,7 @@ GameObject:
   - component: {fileID: 2653560369374272129}
   - component: {fileID: 2653560369374272134}
   m_Layer: 0
-  m_Name: Receiver
+  m_Name: Receiver Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,6 +168,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_messageReceivedWithSource:
+    m_PersistentCalls:
+      m_Calls: []
   m_threadPriority: 0
   m_lastReceived: 
   m_hasBeenKilled: 0
@@ -180,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2653560369680147198}
   m_Layer: 0
-  m_Name: UDPThreadManager
+  m_Name: UDP Thread Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,6 +264,8 @@ MonoBehaviour:
   m_groupAlias: []
   m_lastSent: 
   m_lastException: 
+  m_maxByteDebugSize: 20
+  m_lastBytesSend: 
 --- !u!1 &2888807699125452686
 GameObject:
   m_ObjectHideFlags: 0

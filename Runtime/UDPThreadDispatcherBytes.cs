@@ -13,9 +13,11 @@ public class UDPThreadDispatcherBytes : MonoBehaviour
     public int m_portId = 2504;
     public float m_timeBetweenUnityCheck = 0.05f;
     public BytesEvent m_messageReceived;
+    public UnityEvent<ReceivedMessageWithSourceAsByte> m_messageReceivedWithSource;
     public System.Threading.ThreadPriority m_threadPriority;
 
     public Queue<byte[]> m_receivedMessages = new Queue<byte[]>();
+    public Queue<ReceivedMessageWithSourceAsByte> m_receivedMessagesWithSource = new Queue<ReceivedMessageWithSourceAsByte>();
     public byte[] m_lastReceived;
     private bool m_wantThreadAlive = true;
     private Thread m_threadListener = null;
@@ -89,6 +91,12 @@ public class UDPThreadDispatcherBytes : MonoBehaviour
             m_lastReceived = m_receivedMessages.Dequeue();
             m_messageReceived?.Invoke(m_lastReceived);
         }
+        while (m_receivedMessagesWithSource.Count > 0)
+        {
+            ReceivedMessageWithSourceAsByte msg = m_receivedMessagesWithSource.Dequeue();
+            m_messageReceivedWithSource?.Invoke(msg);
+        }
+
     }
 
     private void ChechUdpClientMessageInComing()
@@ -104,7 +112,9 @@ public class UDPThreadDispatcherBytes : MonoBehaviour
         {
             try
             {
-                m_receivedMessages.Enqueue(m_listener.Receive(ref m_ipEndPoint));
+                byte[] data = m_listener.Receive(ref m_ipEndPoint);
+                m_receivedMessages.Enqueue(data);
+                m_receivedMessagesWithSource.Enqueue(new ReceivedMessageWithSourceAsByte(data, m_ipEndPoint));
             }
             catch (Exception e)
             {
