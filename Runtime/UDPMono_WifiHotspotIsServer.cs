@@ -10,9 +10,6 @@ namespace Eloi.UDP
 
     public class UDPMono_WifiHotspotIsServer : MonoBehaviour
     {
-
-
-
         [Tooltip("Address finishing by 1 that is not 127.0.0.1")]
         public UnityEvent<string> m_onIsServerIpFound;
         [Tooltip("Address starting by 192 and not finishing by 1")]
@@ -29,21 +26,16 @@ namespace Eloi.UDP
         [Tooltip("Regex patterns that identify SERVER IPs (hotspot creator)")]
         public List<string> m_serverRegexPatterns = new List<string>()
 {
-    // Starting by 192 and finishing by 1
-    @"192\.168\.\d+\.1", // Any 192.168.x.1 (fallback)
-    // Starting by 10 and finishing by 1
-    @"10\.\d+\.\d+\.1", // Any 10.x.x.1 (fallback)
+    @"192\.168\.\d+\.1", 
+    @"10\.\d+\.\d+\.1",
 };
 
-        // Define the 2-255 pattern once to keep your code clean
         const string octet2to255 = @"(?:[2-9]|1\d{1,2}|2[0-4]\d|25[0-5])";
 
         [Tooltip("Regex patterns that identify CLIENT IPs (connected to hotspot)")]
         public List<string> m_clientRegexPatterns = new List<string>()
 {
-    // Starting by 192 and not finishing by 0 or 1
     $@"192\.168\.\d+\.{octet2to255}", 
-    // Starting by 10 and not finishing by 0 or 1
     $@"10\.\d+\.\d+\.{octet2to255}",
 };
         public bool m_autoSearchOnEnable = false;
@@ -127,12 +119,12 @@ namespace Eloi.UDP
             string[] parts = ip.Split('.');
             if (parts.Length == 4)
             {
-                parts[3] = "1"; // Change the last octet to 1
+                parts[3] = "1"; 
                 newIp = string.Join(".", parts);
             }
             else
             {
-                newIp = ip; // Return the original IP if it's not valid
+                newIp = ip; 
             }
         }
 
@@ -157,12 +149,10 @@ namespace Eloi.UDP
         {
             List<string> ipAddresses = new List<string>();
 
-            // Get all network interfaces
             NetworkInterface[] networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
 
             foreach (NetworkInterface networkInterface in networkInterfaces)
             {
-                // Filter out loopback and non-operational interfaces
                 if (networkInterface.NetworkInterfaceType == NetworkInterfaceType.Loopback ||
                     networkInterface.OperationalStatus != OperationalStatus.Up)
                 {

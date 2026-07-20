@@ -83,13 +83,7 @@ MonoBehaviour:
   m_onTextSendFromServerToTargetClient:
     m_PersistentCalls:
       m_Calls: []
-  m_maxByteDebugSize: 1024
-  m_lastBytesSend: 
-  m_lastTextSend: 
-  m_lastException: 
-  m_lastReceivedIpv4: 
-  m_lastReceivedBytes: 
-  m_lastReceivedText: 
+  m_parseTextToInteger: 1
   m_onClientIntegerReceived:
     m_PersistentCalls:
       m_Calls: []
@@ -102,4 +96,18 @@ MonoBehaviour:
   m_onClientIndexIntegerReceivedWithSourceIpv4:
     m_PersistentCalls:
       m_Calls: []
-  m_parseTextToInteger: 1
+  m_onIpv4NewClient:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onIpv4ClientsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_maxByteDebugSizeSendReceived: 256
+  m_debugSendMessage: 1
+  m_lastBytesSend: 
+  m_lastTextSend: 
+  m_lastException: 
+  m_debugReceivedMessage: 1
+  m_lastReceivedIpv4: 
+  m_lastReceivedBytes: 
+  m_lastReceivedText: 

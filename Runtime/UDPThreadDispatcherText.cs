@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
-
 public class UDPThreadDispatcherText : MonoBehaviour
 {
     public int m_portId = 2504;
@@ -118,7 +117,7 @@ public class UDPThreadDispatcherText : MonoBehaviour
             }
             catch (Exception e)
             {
-               Debug.Log(e.ToString());
+                Debug.Log(e.ToString());
                 m_wantThreadAlive = false;
             }
         }
