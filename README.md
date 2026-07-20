@@ -1,6 +1,6 @@
 
 ```init  
-git submdule add https://github.com/EloiStree/2020_11_29_upm_udp_thread_in_out_gate.git Packages/be.elab.udpthreadsender
+git submodule add https://github.com/EloiStree/2020_11_29_upm_udp_thread_in_out_gate.git Packages/be.elab.udpthreadsender
 ```  
 
 # Intent
